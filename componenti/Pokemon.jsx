@@ -7,7 +7,7 @@ function Pokemon() {
   const [errore, setErrore] = useState("");
   const [erroreApi, setErroreApi] = useState("");
   const [description, setDescription] = useState("");
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [pokedex, setPokedex] = useState([]);
   const [collapsedError, setCollapsedError] = useState(false);
 
