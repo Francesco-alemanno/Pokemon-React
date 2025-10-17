@@ -5,6 +5,7 @@ function Pokemon() {
   const [pokemonData, setPokemonData] = useState(null);
   const [inputName, setInputName] = useState("");
   const [errore, setErrore] = useState("");
+  const [erroreApi, setErroreApi] = useState("");
   const [description, setDescription] = useState("");
   const [collapsed, setCollapsed] = useState(false);
   const [pokedex, setPokedex] = useState([]);
@@ -38,7 +39,7 @@ function Pokemon() {
         `https://pokeapi.co/api/v2/pokemon/${inputName}`
       );
       if (!response.ok) {
-        setErrore("errore durante il fetch dati");
+        setErroreApi("errore durante il fetch dati");
       } else {
         const data = await response.json();
         setPokemonData(data);
@@ -82,6 +83,7 @@ function Pokemon() {
 
   return (
     <>
+    {/*   CAMPO INPUT DI RICERCA */}
       {collapsed && (
         <form onSubmit={ricerca} className="container">
           <input
@@ -94,9 +96,16 @@ function Pokemon() {
           <button className="cerca-btn">Cerca!</button>
         </form>
       )}
+
+      {/* FINE CAMPO INPUT DI RICERCA */}
+
+      {/* TASTO PER ARPIRE E CHIUDERE POKEDEX */}
       <button className="pokedex-btn" onClick={handleToggle}>
         {!collapsed ? "RIMUOVI POKEDEX" : "MOSTRA POKEDEX"}
       </button>
+      {/* FINE TASTO POKEDEX */}
+
+      {/* POKEDEX */}
       {!collapsed && (
         <div className="pokedex">
           <h2>Il tuo Pokédex</h2>
@@ -137,7 +146,25 @@ function Pokemon() {
           )}
         </div>
       )}
+      {/* FINE POKEDEX */}
 
+      {/* ERRORE DURANTE LA RICERCA DEL POKEMON */}
+      {erroreApi && (
+        <div className="error-box">
+          <h4 style={{ color: "red" }}> ATTENZIONE!</h4>
+          <p>Pokemon non esistente o scritto male!</p>
+          <button
+            onClick={() => {
+              setErroreApi(null);
+            }}
+          >
+            Chiudi
+          </button>
+        </div>
+      )}
+      {/* FINE ERRORE DURANTE LA RICERCA DEL POKEMON */}
+
+      {/* ERROR BOX POKEMON GIA NEL POKEDEX */}
       {errore && collapsed && (
         <div className="error-box">
           <h4 style={{ color: "red" }}> ATTENZIONE!</h4>
@@ -151,7 +178,11 @@ function Pokemon() {
           </button>
         </div>
       )}
-      {pokemonData && collapsed && !errore && (
+      {/* FINE ERROR BOX POKEMON GIA NEL POKEDEX */}
+
+
+      {/* POKECARD  */}
+      {pokemonData && collapsed && !errore && !erroreApi && (
         <div
           className="poke-card"
           style={{
@@ -185,6 +216,8 @@ function Pokemon() {
           <button onClick={aggiungiAlPokedex}>aggiungi al pokedex!</button>
         </div>
       )}
+      {/* FINE POKECARD  */}
+
     </>
   );
 }

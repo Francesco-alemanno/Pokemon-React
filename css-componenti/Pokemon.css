@@ -9,6 +9,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+
 /* CONTAINER DI RICERCA */
 .container {
   display: flex;
@@ -211,6 +212,14 @@ button.toggle-pokedex:hover {
 
 /* Mobile */
 @media (max-width: 480px) {
+  html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
   .container {
     margin-top: 150px;
     padding: 0 10px;
@@ -228,7 +237,9 @@ button.toggle-pokedex:hover {
   }
 
   .poke-card {
-    width: 50%;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
   .error-box{
   border: none;
@@ -237,7 +248,7 @@ button.toggle-pokedex:hover {
   flex-direction: column;
   align-items: center;
   background-color: whitesmoke;
-  width: 50%;
+  width: 90%;
   margin:auto;
   justify-content: center;
   padding: 10px;
